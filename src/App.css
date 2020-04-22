@@ -1,0 +1,77 @@
+.contact-form {
+  width: 500px;
+  margin: auto;
+}
+.testbor {
+  border-: 0.1px solid black;
+  margin-top:-5px;;
+  margin-left: -15px;
+  display: inline-block;
+  width: 200px;
+}
+
+.clearfix {
+  text-align: center;
+  overflow: auto;
+}
+
+.img {
+  width:170;
+  height:170;
+}
+
+.err_msg {
+  text-align: center;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+
+}
+
+p {
+  text-align: center;
+}
+
+.error {
+ color: red;
+}
+
+li{
+  list-style-type: none;
+  float: left;
+  width: 15%;
+  font-size: 100%;
+}
+
+.link {
+  list-style-type: none; 
+}
+
+ input[type=text],input[type=email], input[type=password], input[type=number] {
+     width: 100%;
+     padding: 12px;
+     border: 1px solid #ccc;
+     border-radius: 4px;
+     box-sizing: border-box;
+     margin-top: 6px;
+     margin-bottom: 16px;
+     resize: vertical;
+}
+input[type=submit] {
+     background-color: #4CAF50;
+     color: white;
+     text-align: center;
+     padding: 12px 20px;
+     border: none;
+     border-radius: 4px;
+     cursor: pointer;
+}
+
+h2 {
+  text-align: center;
+}
