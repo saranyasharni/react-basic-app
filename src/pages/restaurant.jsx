@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Jumbotron from 'react-bootstrap/Jumbotron';
 
-class restaurentListing extends Component {
+class restaurantListing extends Component {
+	_isMounted = false;
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -13,16 +13,19 @@ class restaurentListing extends Component {
 			listingData: []
 		};
 	}
-
+	
 	componentDidMount() {
+		this._isMounted = true;
 		fetch("https://opentable.herokuapp.com/api/restaurants?state=IL")
 			.then(res  => res.json())
 			.then(
 				(result) => {
-					this.setState({
-						isLoaded:true,
-						listingData:result.restaurants
-					});
+					if (this._isMounted) {
+						this.setState({
+							isLoaded:true,
+							listingData:result.restaurants
+						});
+					}
 				},
 				(error) => {
 					console.log(error)
@@ -34,19 +37,22 @@ class restaurentListing extends Component {
 			)
 	}
 
+	componentWillUnmount() {
+    	this._isMounted = false;
+  	}
+  	
 	render() {
 		const {error, isLoaded, listingData } = this.state;
-		console.log(listingData);
+		
 		if (error) {
-			   return <h1 className = "err_msg">Error: {error.message}</h1>;
+			return <h1 className = "err_msg">{error.message}</h1>;
 		} else if (!isLoaded) {
 			return <h1 className='err_msg'>Loading...</h1>;
 		} else 
 		return (
-
 			<Container fluid>
   			<Row>
-					{listingData.map(data => (  				
+				{listingData.map(data => (  				
     			<Col sm={3} key = {data.id} className= 'testbor'>  
 					<div className="clearfix">
 						 <br/>
@@ -55,12 +61,11 @@ class restaurentListing extends Component {
 					  <p>{data.address}</p>
 					</div>
     			</Col>
-    	))}
-  </Row>
-
-</Container>
+    	    	))}
+            </Row>
+		</Container>
 		);
 	}
 }
 
-export default restaurentListing;
+export default restaurantListing;
